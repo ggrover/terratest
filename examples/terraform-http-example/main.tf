@@ -17,7 +17,7 @@ resource "aws_instance" "example" {
   user_data              = "${data.template_file.user_data.rendered}"
   vpc_security_group_ids = ["${aws_security_group.example.id}"]
 
-  tags {
+  tags =  {
     Name = "${var.instance_name}"
   }
 }
@@ -47,7 +47,7 @@ resource "aws_security_group" "example" {
 data "template_file" "user_data" {
   template = "${file("${path.module}/user-data/user-data.sh")}"
 
-  vars {
+  vars = {
     instance_text = "${var.instance_text}"
     instance_port = "${var.instance_port}"
   }

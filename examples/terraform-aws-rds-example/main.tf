@@ -19,9 +19,9 @@ data "aws_subnet_ids" "all" {
 
 resource "aws_db_subnet_group" "example" {
   name       = "${var.name}"
-  subnet_ids = ["${data.aws_subnet_ids.all.ids}"]
+  subnet_ids = "${data.aws_subnet_ids.all.ids}"
 
-  tags {
+  tags = {
     Name = "${var.name}"
   }
 }
@@ -35,7 +35,7 @@ resource "aws_db_option_group" "example" {
   engine_name              = "${var.engine_name}"
   major_engine_version     = "${var.major_engine_version}"
 
-  tags {
+  tags = {
     Name = "${var.name}"
   }
 
@@ -53,7 +53,7 @@ resource "aws_db_parameter_group" "example" {
   name        = "${var.name}"
   family      = "${var.family}"
 
-  tags {
+  tags =  {
     Name = "${var.name}"
   }
 
@@ -105,7 +105,7 @@ resource "aws_db_instance" "example" {
   parameter_group_name    = "${aws_db_parameter_group.example.id}"
   option_group_name       = "${aws_db_option_group.example.id}"
 
-  tags {
+  tags =  {
     Name = "${var.name}"
   }
 }
